@@ -11,7 +11,7 @@ export default function CustomButton({
 	function generateStyle(type) {
 		if (type === "filled") {
 			return {
-				backgroundColor: snap.color,
+				backgroundColor: "#BA22ff",
 				color: "#fff",
 			};
 		}
