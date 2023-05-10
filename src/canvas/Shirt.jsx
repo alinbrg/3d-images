@@ -6,7 +6,7 @@ import state from "../store";
 
 export default function Shirt() {
 	const snap = useSnapshot(state);
-	const { nodes, materials } = useGLTF("/shirt_baked.glb");
+	const { nodes, materials } = useGLTF("/public/shirt_baked.glb");
 
 	// console.log(nodes, materials);
 
