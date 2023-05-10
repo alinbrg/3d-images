@@ -31,12 +31,44 @@ export default function Customizer() {
 			case "colorpicker":
 				return <ColorPicker />;
 			case "filepicker":
-				return <FilePicker file={file} setFile={setFile} />;
+				return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
 			case "aipicker":
 				return <AIPicker />;
 			default:
 				return null;
 		}
+	}
+
+	function handleActiveFilterTab(tabName) {
+		switch (tabName) {
+			case "logoShirt":
+				state.isLogoTexture = !activeFilterTab[tabName];
+				break;
+			case "stylishShirt":
+				state.isFullTexture = !activeFilterTab[tabName];
+				break;
+
+			default:
+				state.isFullTexture = false;
+				state.isLogoTexture = true;
+				break;
+		}
+	}
+
+	function handleDecals(type, result) {
+		const decalType = DecalTypes[type];
+		state[decalType.stateProperty] = result;
+		if (!activeFilterTab[decalType.filterTab]) {
+			handleActiveFilterTab(decalType.filterTab);
+		}
+	}
+
+	function readFile(type) {
+		file &&
+			reader(file).then((result) => {
+				handleDecals(type, result);
+				setActiveEditorTab("");
+			});
 	}
 
 	return (
